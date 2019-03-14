@@ -1,0 +1,27 @@
+{
+  "name": "react-native-echarts-tool",
+  "version": "0.0.1",
+  "description": "A echarts package for react-native",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.3",
+    "react-native": ">=0.47.0",
+    "prop-types": ">=15.7.2",
+    "react-native-webview": ">=5.3.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com:rombrandon/react-native-echarts-tool.git"
+  },
+  "keywords": [
+    "react-native-echarts-tool",
+    "react-native-echarts",
+    "react-native-tool",
+    "react-native"
+  ],
+  "author": "brandonnn",
+  "license": "MIT"
+}
