@@ -4,7 +4,12 @@ import {View, Platform} from 'react-native'
 import {WebView} from 'react-native-webview'
 import renderChart from './renderChart'
 
-const source = Platform.OS === 'ios' ? require('./tpl.html') : {uri: 'file:///android_asset/charts/tpl.html'}
+const config = Platform.OS === 'ios' ? {
+  source: require('./tpl.html')
+} : {
+  source: {uri: 'file:///android_asset/charts/tpl.html'},
+  scalesPageToFit: true
+}
 
 export default class index extends Component {
   static propTypes = {
@@ -24,13 +29,13 @@ export default class index extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.option !== this.props.option && this.refs.chart) {
-      this.refs.chart.reload()
+    if (nextProps.option !== this.props.option && this.chart) {
+      this.chart.reload()
     }
   }
 
-  setOption(option) {
-    this.refs.chart.postMessage(JSON.stringify(option))
+  setOption = (option) => {
+    this.chart.postMessage(JSON.stringify(option))
   }
 
   render() {
@@ -44,13 +49,12 @@ export default class index extends Component {
       <View style={style}>
         <View style={{flex: 1, height}}>
           <WebView
+            {...config}
             originWhitelist={['*']}
-            source={source}
-            ref="chart"
+            ref={(ref) => { this.chart = ref }}
             scrollEnabled={false}
             style={{height, backgroundColor}}
             injectedJavaScript={renderChart(option, width, height)}
-            scalesPageToFit={Platform.OS !== 'ios'}
             onMessage={event => onPress(JSON.parse(event.nativeEvent.data))}
           />
         </View>
